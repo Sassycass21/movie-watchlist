@@ -10,7 +10,7 @@ const watchlist = {
         {
             title: "The Princess Bride",
             genre: "Adventure",
-            watched: true
+            watched: false
         },
         {
             title: "Jurrasic Park",
@@ -39,10 +39,13 @@ function renderMovies() {
     movieList.innerHTML = "";
     watchlist.movies.forEach((movie, index) => {
         const li = document.createElement("li");
-        li.textContent = movie.title + " (" + movie.genre + ") - " + (movie.watched ? "Watched" : "Not Watched");
+        const title = document.createElement("h3");
+        title.textContent = movie.title;
+        const details = document.createElement("p");
+        details.textContent = movie.genre + " - " + (movie.watched ? "Watched" : "Not Watched");
 
         const watchedButton = document.createElement("button");
-        watchedButton.tpe = "button";
+        watchedButton.type = "button";
         watchedButton.textContent = movie.watched ? "Mark as Unwatched" : "Mark as Watched";
         watchedButton.addEventListener("click", () => {
             watchlist.toggleWatched(index);
@@ -57,6 +60,8 @@ function renderMovies() {
             renderMovies();
         });
 
+        li.appendChild(title);
+        li.appendChild(details);
         li.appendChild(watchedButton);
         li.appendChild(removeButton);
         movieList.appendChild(li);
@@ -71,7 +76,22 @@ function renderMovies() {
 }
 
 form.addEventListener("submit", (event) => {
-    // TODO (Step 5)
+    event.preventDefault();
+    const title = titleInput.value.trim();
+    const genre = genreSelect.value;
+    if (title === "") {
+        message.textContent = "Enter a movie title.";
+        return;
+    }
+    if (genre === "") {
+        message.textContent = "Choose a genre.";
+        return;
+    }
+    watchlist.movies.push({ title, genre, watched: false });
+    saveMovies();
+    renderMovies();
+    message.textContent = "";
+    titleInput.value = ""
 });
 
 loadMovies();
