@@ -2,7 +2,7 @@ Movie WatchList
 ---------------
 
 GitHub Repository: 
-https://github.com/SassyCass21/movie-watchlist
+https://github.com/Sassycass21/movie-watchlist
 
 Movie Properties:
 Each movie is stored as an object in the movies array.

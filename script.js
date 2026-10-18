@@ -89,7 +89,7 @@ form.addEventListener("submit", (event) => {
     saveMovies();
     renderMovies();
     message.textContent = "";
-    titleInput.value = ""
+    titleInput.value = "";
 });
 
 loadMovies();
