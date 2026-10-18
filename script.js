@@ -10,14 +10,19 @@ const watchlist = {
         {
             title: "The Princess Bride",
             genre: "Adventure",
+            watched: true
+        },
+        {
+            title: "Jurrasic Park",
+            genre: "Adventure",
             watched: false
         }
     ],
     toggleWatched(index) {
-        // TODO (Step 4)
+        this.movies[index].watched = !this.movies[index].watched;
     },
     removeMovie(index) {
-        // TODO (Step 4)
+        this.movies.splice(index, 1);
     }
 };
 
@@ -56,7 +61,7 @@ function renderMovies() {
         li.appendChild(removeButton);
         movieList.appendChild(li);
     });
-    
+
     const emptyMessage = document.getElementById("empty-message");
     if (watchlist.movies.length === 0) {
         emptyMessage.style.display = "block";
