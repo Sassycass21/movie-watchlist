@@ -27,11 +27,18 @@ const watchlist = {
 };
 
 function saveMovies() {
-    // TODO (Step 6)
+    localStorage.setItem("movies", JSON.stringify(watchlist.movies));
 }
 
 function loadMovies() {
-    // TODO (Step 6)
+    const savedMovies = localStorage.getItem("movies");
+    if (savedMovies !== null) {
+        try {
+            watchlist.movies = JSON.parse(savedMovies);
+        } catch (error) {
+            console.log("Error loading movies:", error);
+        }
+    }
 }
 
 function renderMovies() {
@@ -49,6 +56,7 @@ function renderMovies() {
         watchedButton.textContent = movie.watched ? "Mark as Unwatched" : "Mark as Watched";
         watchedButton.addEventListener("click", () => {
             watchlist.toggleWatched(index);
+            saveMovies();
             renderMovies();
         });
 
@@ -57,6 +65,7 @@ function renderMovies() {
         removeButton.textContent = "Remove";
         removeButton.addEventListener("click", () => {
             watchlist.removeMovie(index);
+            saveMovies();
             renderMovies();
         });
 
