@@ -6,18 +6,7 @@ const movieList = document.getElementById("movie-list");
 const emptyMessage = document.getElementById("empty-message");
 
 const watchlist = {
-    movies: [
-        {
-            title: "The Princess Bride",
-            genre: "Adventure",
-            watched: false
-        },
-        {
-            title: "Jurrasic Park",
-            genre: "Adventure",
-            watched: false
-        }
-    ],
+    movies: [],
     toggleWatched(index) {
         this.movies[index].watched = !this.movies[index].watched;
     },
@@ -53,7 +42,7 @@ function renderMovies() {
 
         const watchedButton = document.createElement("button");
         watchedButton.type = "button";
-        watchedButton.textContent = movie.watched ? "Mark as Unwatched" : "Mark as Watched";
+        watchedButton.textContent = movie.watched ? "☑️ Mark as Unwatched" : "✅ Mark as Watched";
         watchedButton.addEventListener("click", () => {
             watchlist.toggleWatched(index);
             saveMovies();
@@ -62,7 +51,7 @@ function renderMovies() {
 
         const removeButton = document.createElement("button");
         removeButton.type = "button";
-        removeButton.textContent = "Remove";
+        removeButton.textContent = "❌ Remove";
         removeButton.addEventListener("click", () => {
             watchlist.removeMovie(index);
             saveMovies();
